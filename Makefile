@@ -10,4 +10,17 @@ SOURCE = eat.c \
 
 HEADER = philosophers.h
 
-OBJECTS
+OBJECTS = $(SOURCE:.c=.o)
+
+CC = gcc
+
+CFLAGS = -Wall -Wextra -Werror
+
+$(NAME): $(OBJECTS) $(HEADER)
+		$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
+
+clean:
+		rm -rf $(OBJECTS)
+
+fclean:
+		rm -rf $(OBJECTS) $(NAME)

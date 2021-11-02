@@ -3,9 +3,11 @@
 void give_forks(t_main *args, t_philos **philos)
 {
 	int	i = 0;
-	while (i < args->n_of_philos - 1)
+	while (i < args->n_of_philos)
 	{
-		if (i = 0)
+		philos[i] = malloc(sizeof(t_philos));
+		write (1, "!\n", 2);
+		if (i == 0)
 		{
 			philos[i]->philo = i + 1;
 			philos[i]->left_fork = args->n_of_philos;
@@ -30,7 +32,6 @@ void give_forks(t_main *args, t_philos **philos)
 
 int	start_gathering(t_main *args, t_philos **philos)
 {
-	philos = malloc(sizeof(t_philos) * args->n_of_philos);
 	if (!philos)
 		return (-1);
 	give_forks(args, philos);
