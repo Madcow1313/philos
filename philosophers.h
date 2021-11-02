@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <limits.h>
+#include <sys/time.h>
 
 typedef struct s_philos
 {
@@ -20,6 +21,8 @@ typedef struct s_main_struct
 	int time_to_die;
 	int	time_to_sleep;
 	int	number_of_times_each_ph_must_eat;
+	struct timeval start_time;
+	suseconds_t	start;
 }	t_main;
 
 typedef struct s_forks
@@ -27,11 +30,18 @@ typedef struct s_forks
 	pthread_mutex_t *forks;
 }				t_forks;
 
+typedef struct s_arguments
+{
+	t_philos	**philos;
+	pthread_mutex_t		*forks;
+}				t_arguments;
+
+
 int	fill_main_struct(t_main *list, int argc, char **argv);
 signed long long	ft_atoi_long(const char	*string);
 void	init_philos(t_philos *philo, int ordinal_number, int left_fork, int right_fork);
 void	init_mutex(pthread_mutex_t *forks, int n_of_philos);
 int	start_gathering(t_main *args, t_philos **philos);
 void	start_dinner(pthread_mutex_t *forks, t_main *args, t_philos **philos);
-void	eat(t_philos *philo, pthread_mutex_t *forks);
+void	eat(void *arg);
 #endif
