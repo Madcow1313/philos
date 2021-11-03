@@ -7,14 +7,16 @@ void	init_philos(t_philos *philo, int ordinal_number, int left_fork, int right_f
 	philo->right_fork = right_fork;
 }
 
-void	init_mutex(pthread_mutex_t *forks, int n_of_philos)
+void	init_mutex(t_forks *forks, int n_of_philos)
 {
 	int	i;
 
 	i = 0;
 	while (i < n_of_philos)
 	{
-		pthread_mutex_init(&forks[i], NULL);
+		write(1, "Iamhere\n", 8);
+		pthread_mutex_init(&forks->forks[i], NULL);
+		write(1, "shit\n", 5);
 		i++;
 	}
 }

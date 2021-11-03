@@ -3,9 +3,9 @@
 
 int main(int argc, char **argv)
 {
-	pthread_mutex_t	*forks;
+	t_forks	*forks;
 	t_main	*args;
-	t_philos **philos;
+	t_philos *philos;
 
 	philos = NULL;
 	forks = NULL;
@@ -15,7 +15,6 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	args = malloc(sizeof(t_main));
-	forks = malloc(sizeof(t_forks));
 	if (!args)
 	{
 		write (2, "Error! Something went wrong with malloc!\n", 42);
@@ -28,9 +27,13 @@ int main(int argc, char **argv)
 		write (2, "Error! Wrong arguments!\n", 25);
 		return (0);
 	}
-	forks = malloc (sizeof(pthread_mutex_t) * args->n_of_philos);
+	forks = malloc(sizeof(t_forks) * (args->n_of_philos));
 	philos = malloc(sizeof(t_philos) * (args->n_of_philos));
-	if (start_gathering(args, philos) == -1)
+	pthread_mutex_t real_forks[args->n_of_philos];
+	//printf("%d\n", args->n_of_philos);
+	forks->forks = real_forks;
+	
+	if (start_gathering(args, &philos) == -1)
 	{
 		write (2, "Error! Something went wrong with malloc!\n", 42);
 		if (args)
@@ -39,7 +42,8 @@ int main(int argc, char **argv)
 			free (forks);
 		return (0);
 	}
-	start_dinner(forks, args, philos);
+	//start_dinner(forks, args, &philos);
+	start_supper(args, &philos, forks);
 	while (1);
 	return (0);
 }
