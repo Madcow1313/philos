@@ -13,8 +13,12 @@ void	*eat(void *arg)
 	pthread_mutex_lock(&forks->forks[philosopher->left_fork]);
 	gettimeofday(&new, NULL);
 	time = new.tv_usec;
-	//printf("%d has taken a fork\n", (time));
-	pthread_mutex_unlock(arguments->forks->forks);
+	printf("%d %d has taken a %d fork\n", (time - arguments->args->start), philosopher->philo, philosopher->left_fork);
+	pthread_mutex_lock(&forks->forks[philosopher->right_fork]);
+	gettimeofday(&new, NULL);
+	time = new.tv_usec;
+	printf("%d %d has taken a %d fork\n", (time - arguments->args->start), philosopher->philo, philosopher->right_fork);
+	//pthread_mutex_unlock(arguments->forks->forks);
 	return (0);
 }
 

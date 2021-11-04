@@ -29,18 +29,20 @@ void	start_supper(t_main	*args, t_philos **philos, t_forks *forks)
 	int	i;
 
 	i = 0;
-	init_mutex(arguments->forks, args->n_of_philos);
+	//init_mutex(forks->forks, args->n_of_philos);
 	while (i < args->n_of_philos)
 	{
 		arguments[i].philos = &philos[i];
 		arguments[i].forks = forks;
+		arguments[i].args = args;
 		i++;
 	}
 	i = 0;
+	gettimeofday(&args->start_time, NULL);
+	args->start = args->start_time.tv_usec;
 	while (i < args->n_of_philos)
 	{
 		pthread_create(&thread[i], NULL, eat, &arguments[i]);
-		break;
 		i++;
 	}
 }

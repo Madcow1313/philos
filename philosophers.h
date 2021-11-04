@@ -34,13 +34,14 @@ typedef struct s_arguments
 {
 	t_philos	**philos;
 	t_forks	*forks;
+	t_main *args;
 }				t_arguments;
 
 
 int	fill_main_struct(t_main *list, int argc, char **argv);
 signed long long	ft_atoi_long(const char	*string);
 void	init_philos(t_philos *philo, int ordinal_number, int left_fork, int right_fork);
-void	init_mutex(t_forks *forks, int n_of_philos);
+void	init_mutex(pthread_mutex_t *forks, int n_of_philos);
 int	start_gathering(t_main *args, t_philos **philos);
 void	start_dinner(pthread_mutex_t **forks, t_main *args, t_philos **philos);
 void	*eat(void *arg);
