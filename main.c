@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 	}
 	//start_dinner(forks, args, &philos);
 	start_supper(args, philos, forks);
-	while (1);
+	//while (1);
 	return (0);
 }
 

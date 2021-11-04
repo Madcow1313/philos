@@ -45,4 +45,10 @@ void	start_supper(t_main	*args, t_philos **philos, t_forks *forks)
 		pthread_create(&thread[i], NULL, eat, &arguments[i]);
 		i++;
 	}
+	i = 0;
+	while (i < args->n_of_philos)
+	{
+		pthread_join(thread[i], NULL);
+		i++;
+	}
 }
