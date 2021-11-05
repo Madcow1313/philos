@@ -22,14 +22,11 @@
 // 	}
 // }
 
-void	start_supper(t_main	*args, t_philos **philos, t_forks *forks)
+void	make_args(t_main	*args, t_philos **philos, t_forks *forks, t_arguments *arguments)
 {
-	t_arguments arguments[args->n_of_philos];
-	pthread_t thread[args->n_of_philos];
 	int	i;
 
 	i = 0;
-	//init_mutex(forks->forks, args->n_of_philos);
 	while (i < args->n_of_philos)
 	{
 		arguments[i].philos = &philos[i];
@@ -37,18 +34,46 @@ void	start_supper(t_main	*args, t_philos **philos, t_forks *forks)
 		arguments[i].args = args;
 		i++;
 	}
+}
+
+void	run_threads(pthread_t *thread, t_arguments *arguments)
+{
+	int	i;
+
 	i = 0;
+	while (1)
+	{
+		i = 0;
+		while (i < arguments->args->n_of_philos)
+		{
+			if (i % 2 != 0)
+			{	
+				pthread_create(&thread[i], NULL, eat, &arguments[i]);
+				pthread_join(thread[i], NULL);
+			}
+			i++;
+		}
+		i = 0;
+		while (i < arguments->args->n_of_philos)
+		{
+			if (i % 2 == 0)
+			{	
+				pthread_create(&thread[i], NULL, eat, &arguments[i]);
+				pthread_join(thread[i], NULL);
+			}
+			i++;
+		}
+		break;
+	}
+}
+
+void	start_supper(t_main	*args, t_philos **philos, t_forks *forks)
+{
+	t_arguments arguments[args->n_of_philos];
+	pthread_t thread[args->n_of_philos];
+
+	make_args(args, philos, forks, arguments);
 	gettimeofday(&args->start_time, NULL);
 	args->start = args->start_time.tv_usec;
-	while (i < args->n_of_philos)
-	{
-		pthread_create(&thread[i], NULL, eat, &arguments[i]);
-		i++;
-	}
-	i = 0;
-	while (i < args->n_of_philos)
-	{
-		pthread_join(thread[i], NULL);
-		i++;
-	}
+	run_threads(thread, arguments);
 }

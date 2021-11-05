@@ -5,7 +5,6 @@ void give_forks(t_main *args, t_philos **philos)
 	int	i = 0;
 	while (i < args->n_of_philos)
 	{
-		write(1, "Iamhere\n", 9);
 		//philos[i] = malloc(sizeof(t_philos));
 		if (i == 0)
 		{
