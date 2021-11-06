@@ -63,7 +63,6 @@ void	run_threads(pthread_t *thread, t_arguments *arguments)
 			}
 			i++;
 		}
-		break;
 	}
 }
 

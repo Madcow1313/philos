@@ -17,10 +17,12 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(OBJECTS) $(HEADER)
-		$(CC) $(CFLAGS) -pthread $(OBJECTS) -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 
 clean:
 		rm -rf $(OBJECTS)
 
 fclean:
 		rm -rf $(OBJECTS) $(NAME)
+
+re:		fclean $(NAME)

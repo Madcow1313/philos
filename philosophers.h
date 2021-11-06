@@ -12,6 +12,10 @@ typedef struct s_philos
 	int philo;
 	int left_fork;
 	int right_fork;
+	int	life;
+	int	last_meal;
+	int	eating_counter;
+	pthread_mutex_t	mutex;
 }			t_philos;
 
 typedef struct s_main_struct
@@ -46,4 +50,5 @@ int	start_gathering(t_main *args, t_philos **philos);
 void	start_dinner(pthread_mutex_t **forks, t_main *args, t_philos **philos);
 void	*eat(void *arg);
 void	start_supper(t_main	*args, t_philos **philos, t_forks *forks);
+void	*philo_sleep(void *arg);
 #endif

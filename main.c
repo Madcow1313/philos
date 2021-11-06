@@ -32,6 +32,7 @@ int main(int argc, char **argv)
 	while (i < args->n_of_philos)
 	{
 		philos[i] = malloc(sizeof(t_philos));
+		pthread_mutex_init(&philos[i]->mutex, NULL);
 		i++;
 	}
 	forks->forks = malloc(sizeof(forks->forks));
