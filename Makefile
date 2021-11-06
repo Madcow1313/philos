@@ -19,6 +19,8 @@ CFLAGS = -Wall -Wextra -Werror
 $(NAME): $(OBJECTS) $(HEADER)
 		$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 
+all:	$(NAME)
+
 clean:
 		rm -rf $(OBJECTS)
 
