@@ -44,9 +44,10 @@ typedef struct s_arguments
 
 int	fill_main_struct(t_main *list, int argc, char **argv);
 signed long long	ft_atoi_long(const char	*string);
+int	check_args_and_fill(t_main *args, int argc, char **argv);
+int	check_mallocs_and_gather(t_forks *forks, t_philos **philos, t_main *args);
 void	init_philos(t_philos *philo, int ordinal_number, int left_fork, int right_fork);
 void	init_mutex(pthread_mutex_t *forks, int n_of_philos);
-int	start_gathering(t_main *args, t_philos **philos);
 void	start_dinner(pthread_mutex_t **forks, t_main *args, t_philos **philos);
 void	*eat(void *arg);
 void	start_supper(t_main	*args, t_philos **philos, t_forks *forks);
