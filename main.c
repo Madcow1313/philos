@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 		return (0);
 	init_mutex(forks->forks, args->n_of_philos);
 	philos = give_forks(args, philos);
-	printf("%d\n", args->n_of_philos);
+	//printf("%d\n", args->n_of_philos);
 	start_supper(args, philos, forks);
 	pthread_exit(NULL);
 	return (0);

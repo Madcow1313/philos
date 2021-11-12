@@ -26,7 +26,7 @@ typedef struct s_main_struct
 	int	time_to_sleep;
 	int	number_of_times_each_ph_must_eat;
 	struct timeval start_time;
-	suseconds_t	start;
+	unsigned int	start;
 }	t_main;
 
 typedef struct s_forks
@@ -55,4 +55,5 @@ void	start_supper(t_main	*args, t_philos **philos, t_forks *forks);
 void	*philo_sleep(void *arg);
 int	free_and_exit(t_forks *forks, t_philos **philos, t_main *args, int i);
 int	start_gathering(t_main *args, t_philos **philos);
+unsigned int	get_time();
 #endif

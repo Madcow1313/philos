@@ -7,7 +7,8 @@ SOURCE = eat.c \
 		main.c \
 		start_dinner.c \
 		start_gathering.c \
-		check_errors.c
+		check_errors.c \
+		get_time.c
 
 HEADER = philosophers.h
 

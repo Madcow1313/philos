@@ -5,6 +5,10 @@ t_philos	**give_forks(t_main *args, t_philos **philos)
 	int	i = 0;
 	while (i < args->n_of_philos)
 	{
+		// philos[i]->philo = i + 1;
+		// philos[i]->left_fork = i;
+		// philos[i]->right_fork = (i + 1) % (args->n_of_philos - 1);
+		// i++;
 		if (i == 0)
 		{
 			philos[i]->philo = i + 1;
