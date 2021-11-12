@@ -12,14 +12,14 @@ t_philos	**give_forks(t_main *args, t_philos **philos)
 		if (i == 0)
 		{
 			philos[i]->philo = i + 1;
-			philos[i]->left_fork = args->n_of_philos;
+			philos[i]->left_fork = args->n_of_philos - 1;
 			philos[i]->right_fork = i;
 		}
 		else if (i == args->n_of_philos - 1)
 		{
 			philos[i]->philo = i + 1;
 			philos[i]->left_fork = args->n_of_philos - 1;
-			philos[i]->right_fork = args->n_of_philos;
+			philos[i]->right_fork = 0;
 		}
 		else
 		{
