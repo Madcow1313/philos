@@ -6,7 +6,8 @@ SOURCE = eat.c \
 		init_func.c \
 		main.c \
 		start_dinner.c \
-		start_gathering.c
+		start_gathering.c \
+		check_errors.c
 
 HEADER = philosophers.h
 

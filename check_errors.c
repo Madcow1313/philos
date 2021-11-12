@@ -32,11 +32,11 @@ int	check_mallocs_and_gather(t_forks *forks, t_philos **philos, t_main *args)
 	{
 		philos[i] = malloc(sizeof(t_philos));
 		if (!philos[i])
-			return(free_and_exit);
+			return(free_and_exit(forks, philos, args, i - 1));
 		pthread_mutex_init(&philos[i]->mutex, NULL);
 		i++;
 	}
-	give_forks(args, philos);
+	//give_forks(args, philos);
 	return (0);
 }
 

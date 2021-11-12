@@ -48,8 +48,11 @@ int	check_args_and_fill(t_main *args, int argc, char **argv);
 int	check_mallocs_and_gather(t_forks *forks, t_philos **philos, t_main *args);
 void	init_philos(t_philos *philo, int ordinal_number, int left_fork, int right_fork);
 void	init_mutex(pthread_mutex_t *forks, int n_of_philos);
+t_philos **give_forks(t_main *args, t_philos **philos);
 void	start_dinner(pthread_mutex_t **forks, t_main *args, t_philos **philos);
 void	*eat(void *arg);
 void	start_supper(t_main	*args, t_philos **philos, t_forks *forks);
 void	*philo_sleep(void *arg);
+int	free_and_exit(t_forks *forks, t_philos **philos, t_main *args, int i);
+int	start_gathering(t_main *args, t_philos **philos);
 #endif

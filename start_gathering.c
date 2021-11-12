@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-void give_forks(t_main *args, t_philos **philos)
+t_philos	**give_forks(t_main *args, t_philos **philos)
 {
 	int	i = 0;
 	while (i < args->n_of_philos)
@@ -25,4 +25,13 @@ void give_forks(t_main *args, t_philos **philos)
 		}
 		i++;
 	}
+	return (philos);
+}
+
+int	start_gathering(t_main *args, t_philos **philos)
+{
+	if (!philos)
+		return (-1);
+	give_forks(args, philos);
+	return (0);
 }
