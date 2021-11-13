@@ -58,4 +58,5 @@ int	start_gathering(t_main *args, t_philos **philos);
 unsigned int	get_time();
 void	*think(void *arg);
 void call_waiter(t_arguments *arguments);
+void	init_philo_mutex(t_philos **philos, int n_of_philos);
 #endif

@@ -11,6 +11,7 @@ void	*eat(void *arg)
 	forks = arguments->forks;
 	while (1)
 	{
+		call_waiter(arguments);
 		pthread_mutex_lock(&philosopher->mutex);
 		pthread_mutex_lock(&forks->forks[philosopher->left_fork]);
 		time = get_time();
@@ -29,7 +30,10 @@ void	*eat(void *arg)
 		philo_sleep(arg);
 		pthread_mutex_unlock(&philosopher->mutex);
 		if (philosopher->eating_counter == 0)
+		{
+			printf("%d philosopher is full\n", philosopher->philo);
 			break;
+		}
 	}
 	return (0);
 }

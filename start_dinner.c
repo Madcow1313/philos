@@ -94,5 +94,6 @@ void	start_supper(t_main	*args, t_philos **philos, t_forks *forks)
 	args->start = get_time();
 	arguments = malloc(sizeof(t_arguments) * args->n_of_philos);
 	make_args(args, philos, forks, arguments);
+	call_waiter(arguments);
 	run_threads(&thread, arguments);
 }

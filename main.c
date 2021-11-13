@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 	if (check_mallocs_and_gather(forks, philos, args) == -1)
 		return (0);
 	init_mutex(forks->forks, args->n_of_philos);
+	init_philo_mutex(philos, args->n_of_philos);
 	philos = give_forks(args, philos);
 	//printf("%d\n", args->n_of_philos);
 	start_supper(args, philos, forks);

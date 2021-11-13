@@ -3,31 +3,27 @@
 static void	*service(void *args)
 {
 	t_arguments *arguments;
-	t_philos	**philosophers;
+	t_philos	*philosophers;
 	int	i;
 	int j;
 
 	arguments = (t_arguments *)args;
-	j = arguments[0].args->n_of_philos;
+	j = arguments->args->n_of_philos;
 	i = 0;
-	philosophers = arguments->philos;
-	call_waiter(arguments);
+	philosophers = *arguments->philos;
 	while (1)
 	{
-		pthread_mutex_lock(&philosophers[i]->mutex);
-		if (get_time() - philosophers[i]->last_meal > (unsigned int)arguments[i].args->time_to_die)
+		pthread_mutex_lock(&philosophers->mutex);
+		if (get_time() - philosophers->last_meal > (unsigned int)arguments->args->time_to_die)
 		{	
-			printf("Philosopher %d is dead at %d\n", i + 1, get_time() - philosophers[i]->last_meal);
+			//pthread_exit(NULL);
 			break;
 		}
-		pthread_mutex_unlock(&philosophers[i]->mutex);
-		i++;
-		if (i <= j)
-		{
-			i = 0;
-			usleep(1);
-		}
+		pthread_mutex_unlock(&philosophers->mutex);
+		usleep(100);
+		//write(1, "wth\n", 4);
 	}
+	printf("Philosopher %d is dead at %d\n", i + 1, get_time() - philosophers->last_meal);
 	return (0);
 }
 

@@ -18,3 +18,15 @@ void	init_mutex(pthread_mutex_t *forks, int n_of_philos)
 		i++;
 	}
 }
+
+void	init_philo_mutex(t_philos **philos, int n_of_philos)
+{
+	int	i;
+
+	i = 0;
+	while (i < n_of_philos)
+	{
+		pthread_mutex_init(&philos[i]->mutex, NULL);
+		i++;
+	}
+}
