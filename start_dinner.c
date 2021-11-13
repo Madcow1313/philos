@@ -29,6 +29,7 @@ void	make_args(t_main	*args, t_philos **philos, t_forks *forks, t_arguments *arg
 	i = 0;
 	while (i < args->n_of_philos)
 	{
+		philos[i]->last_meal = args->start;
 		arguments[i].philos = &philos[i];
 		arguments[i].forks = forks;
 		arguments[i].args = args;

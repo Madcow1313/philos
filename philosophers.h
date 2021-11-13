@@ -13,7 +13,7 @@ typedef struct s_philos
 	int left_fork;
 	int right_fork;
 	int	life;
-	int	last_meal;
+	unsigned int	last_meal;
 	int	eating_counter;
 	pthread_mutex_t	mutex;
 }			t_philos;
@@ -57,4 +57,5 @@ int	free_and_exit(t_forks *forks, t_philos **philos, t_main *args, int i);
 int	start_gathering(t_main *args, t_philos **philos);
 unsigned int	get_time();
 void	*think(void *arg);
+void call_waiter(t_arguments *arguments);
 #endif
