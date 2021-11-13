@@ -9,9 +9,9 @@ int main(int argc, char **argv)
 	args = malloc(sizeof(t_main));
 	if (check_args_and_fill(args, argc, argv) == -1)
 		return (0);
-	forks = malloc(sizeof(t_forks));
+	forks = malloc(sizeof(*(forks)) * (args->n_of_philos));
 	philos = malloc(sizeof(t_philos *) * (args->n_of_philos));
-	forks->forks = malloc(sizeof(forks->forks));
+	forks->forks = malloc(sizeof(*(forks->forks)) * (args->n_of_philos));
 	if (check_mallocs_and_gather(forks, philos, args) == -1)
 		return (0);
 	init_mutex(forks->forks, args->n_of_philos);
@@ -19,5 +19,6 @@ int main(int argc, char **argv)
 	//printf("%d\n", args->n_of_philos);
 	start_supper(args, philos, forks);
 	pthread_exit(NULL);
+	free_and_exit(forks, philos, args, args->n_of_philos);
 	return (0);
 }

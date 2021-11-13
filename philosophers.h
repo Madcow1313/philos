@@ -56,4 +56,5 @@ void	*philo_sleep(void *arg);
 int	free_and_exit(t_forks *forks, t_philos **philos, t_main *args, int i);
 int	start_gathering(t_main *args, t_philos **philos);
 unsigned int	get_time();
+void	*think(void *arg);
 #endif

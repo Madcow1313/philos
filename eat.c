@@ -9,17 +9,27 @@ void	*eat(void *arg)
 
 	philosopher = *arguments->philos;
 	forks = arguments->forks;
-	pthread_mutex_lock(&forks->forks[philosopher->left_fork]);
-	time = get_time();
-	printf("%u %d has taken a %d fork\n", (time - arguments->args->start), philosopher->philo, philosopher->left_fork);
-	pthread_mutex_lock(&forks->forks[philosopher->right_fork]);
-	time = get_time();
-	printf("%u %d has taken a %d fork\n", (time - arguments->args->start), philosopher->philo, philosopher->right_fork);
-	printf("%u %d is eating\n", (time - arguments->args->start), philosopher->philo);
-	usleep(arguments->args->time_to_eat * 1000);
-	philo_sleep(arg);
-	pthread_mutex_unlock(&forks->forks[philosopher->left_fork]);
-	pthread_mutex_unlock(&forks->forks[philosopher->right_fork]);
+	//pthread_mutex_t	entry_point;
+	while (1)
+	{
+		//pthread_mutex_lock(&entry_point);
+		pthread_mutex_lock(&forks->forks[philosopher->left_fork]);
+		time = get_time();
+		printf("%u %d has taken a %d fork\n", (time - arguments->args->start), philosopher->philo, philosopher->left_fork);
+		pthread_mutex_lock(&forks->forks[philosopher->right_fork]);
+		time = get_time();
+		printf("%u %d has taken a %d fork\n", (time - arguments->args->start), philosopher->philo, philosopher->right_fork);
+		printf("%u %d is eating\n", (time - arguments->args->start), philosopher->philo);
+		usleep(arguments->args->time_to_eat * 1000);
+		pthread_mutex_unlock(&forks->forks[philosopher->left_fork]);
+		pthread_mutex_unlock(&forks->forks[philosopher->right_fork]);
+		philosopher->eating_counter--;
+		if (philosopher->eating_counter < -100)
+			philosopher->eating_counter = -1;
+		philo_sleep(arg);
+		if (philosopher->eating_counter == 0)
+			break;
+	}
 	return (0);
 }
 
@@ -32,6 +42,7 @@ void	*think(void *arg)
 	philosopher = *arguments->philos;
 	time = get_time();
 	printf("%u %d is thinking\n", (time - arguments->args->start), philosopher->philo);
+	usleep((arguments->args->time_to_die - 60) * 1000);
 	return (0);
 }
 

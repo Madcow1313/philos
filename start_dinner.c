@@ -41,8 +41,8 @@ void	run_threads(pthread_t *thread, t_arguments *arguments)
 	int	i;
 
 	i = 0;
-	while (1)
-	{
+	// while (1)
+	// {
 		i = 0;
 		while (i < arguments->args->n_of_philos)
 		{
@@ -50,8 +50,22 @@ void	run_threads(pthread_t *thread, t_arguments *arguments)
 			{	
 				//arguments[i].args->start = get_time();
 				pthread_create(&thread[i], NULL, eat, &arguments[i]);
-				pthread_join(thread[i], NULL);
-				//pthread_detach(thread[i]);
+				//pthread_join(thread[i], NULL);
+				pthread_detach(thread[i]);
+				//usleep(100);
+			}
+			i++;
+		}
+		i = 0;
+		while (i < arguments->args->n_of_philos)
+		{
+			if (i % 2 != 0)
+			{	
+				//arguments[i].args->start = get_time();
+				pthread_create(&thread[i], NULL, think, &arguments[i]);
+				//pthread_join(thread[i], NULL);
+				pthread_detach(thread[i]);
+				//usleep(100);
 			}
 			i++;
 		}
@@ -62,20 +76,22 @@ void	run_threads(pthread_t *thread, t_arguments *arguments)
 			{	
 				//arguments[i].args->start = get_time();
 				pthread_create(&thread[i], NULL, eat, &arguments[i]);
-				pthread_join(thread[i], NULL);
-				//pthread_detach(thread[i]);
+				//pthread_join(thread[i], NULL);
+				pthread_detach(thread[i]);
+				//usleep(100);
 			}
 			i++;
 		}
-	}
+	//}
 }
 
 void	start_supper(t_main	*args, t_philos **philos, t_forks *forks)
 {
-	t_arguments arguments[args->n_of_philos];
-	pthread_t thread[args->n_of_philos];
+	t_arguments *arguments;
+	pthread_t thread;
 
 	args->start = get_time();
+	arguments = malloc(sizeof(t_arguments) * args->n_of_philos);
 	make_args(args, philos, forks, arguments);
-	run_threads(thread, arguments);
+	run_threads(&thread, arguments);
 }
