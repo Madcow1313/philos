@@ -9,12 +9,21 @@ int main(int argc, char **argv)
 	args = malloc(sizeof(t_main));
 	if (check_args_and_fill(args, argc, argv) == -1)
 		return (0);
-	forks = malloc(sizeof(*(forks)) * (args->n_of_philos));
-	philos = malloc(sizeof(t_philos *) * (args->n_of_philos));
+	forks = malloc(sizeof(*(forks)));
+	philos = malloc(sizeof(t_philos) * (args->n_of_philos));
 	forks->forks = malloc(sizeof(*(forks->forks)) * (args->n_of_philos));
+	int i = 0;
+	while (i < args->n_of_philos)
+	{
+		philos[i] = malloc(sizeof(*(philos[i])));
+		i++;
+	}
 	if (check_mallocs_and_gather(forks, philos, args) == -1)
 		return (0);
-	init_mutex(forks->forks, args->n_of_philos);
+	if (init_mutex(forks->forks, args->n_of_philos) == 1)
+	{
+		return (0);
+	}
 	init_philo_mutex(philos, args->n_of_philos);
 	philos = give_forks(args, philos);
 	//printf("%d\n", args->n_of_philos);

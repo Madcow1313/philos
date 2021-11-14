@@ -31,9 +31,9 @@ int	check_mallocs_and_gather(t_forks *forks, t_philos **philos, t_main *args)
 	}
 	while (i < args->n_of_philos)
 	{
-		philos[i] = malloc(sizeof(t_philos));
-		if (!philos[i])
-			return(free_and_exit(forks, philos, args, i - 1));
+		// philos[i] = malloc(sizeof(t_philos));
+		// if (!philos[i])
+		// 	return(free_and_exit(forks, philos, args, i - 1));
 		pthread_mutex_init(&philos[i]->mutex, NULL);
 		i++;
 	}
