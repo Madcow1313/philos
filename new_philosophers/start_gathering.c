@@ -11,20 +11,18 @@ void	give_forks(t_main *list)
 		{
 			list->philos[i].left_fork = &list->forks[list->nb_of_philos - 1];
 			list->philos[i].right_fork = &list->forks[i];
-			list->philos[i].eaten_meals = 0;
 		}
 		else if (i == list->nb_of_philos - 1)
 		{
 			list->philos[i].left_fork = &list->forks[i - 1];
 			list->philos[i].right_fork = &list->forks[list->nb_of_philos - 1];
-			list->philos[i].eaten_meals = 0;
 		}
 		else
 		{
 			list->philos[i].left_fork = &list->forks[i - 1];
 			list->philos[i].right_fork = &list->forks[i];
-			list->philos[i].eaten_meals = 0;
 		}
+		list->philos[i].eaten_meals = 0;
 		i++;
 	}
 }

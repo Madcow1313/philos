@@ -6,7 +6,7 @@ int	check_death(t_main *list, int i)
 	{
 		pthread_mutex_lock(list->right_to_write);
 		printf("%ld %d philosopher is dead\n",
-			get_time() - list->philos[i].last_meal, i + 1);
+			get_time() - list->start_time, i + 1);
 		return (0);
 	}
 	return (1);
@@ -52,7 +52,7 @@ void	run_threads(t_main *list)
 	{
 		if (i % 2 == 0)
 		{	
-			list->philos[i].last_meal = list->start_time;
+			list->philos[i].last_meal = get_time();
 			if (pthread_create(&thread, NULL, routine, &list->philos[i]))
 			{
 				pthread_mutex_lock(list->right_to_write);
@@ -68,13 +68,14 @@ void	run_threads(t_main *list)
 	{
 		if (i % 2 != 0)
 		{	
-			list->philos[i].last_meal = list->start_time;
+			list->philos[i].last_meal = get_time();
 			if (pthread_create(&thread, NULL, routine, &list->philos[i]))
 			{
 				pthread_mutex_lock(list->right_to_write);
 				printf("Error, unable to create thread\n");
 				return ;
 			}
+			usleep(100);
 			pthread_detach(thread);
 		}
 		i++;

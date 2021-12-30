@@ -35,7 +35,6 @@ void	think(t_philos *philo)
 	pthread_mutex_lock(philo->right_to_write);
 	printf("%ld %d philosopher is thinking\n", get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
-	usleep(philo->table->time_to_sleep * 1000);	
 }
 
 void	*routine(void *arg)

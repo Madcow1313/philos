@@ -20,17 +20,14 @@ int	init_mutex(t_main *list)
 int	init_philos(t_main *list)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 1;
 	list->philos = malloc(sizeof(t_philos) * list->nb_of_philos);
 	if (!(list->philos))
 		return (0);
-	while (i <= list->nb_of_philos)
+	while (i < list->nb_of_philos)
 	{
-		list->philos[j].philo_pos = i + 1;
-		j++;
+		list->philos[i].philo_pos = i + 1;
 		i++;
 	}
 	return (1);
