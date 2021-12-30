@@ -27,7 +27,7 @@ int	init_philos(t_main *list)
 	list->philos = malloc(sizeof(t_philos) * list->nb_of_philos);
 	if (!(list->philos))
 		return (0);
-	while (i < list->nb_of_philos)
+	while (i <= list->nb_of_philos)
 	{
 		list->philos[j].philo_pos = i + 1;
 		j++;

@@ -2,12 +2,13 @@
 
 int	start_dinner(t_main *list)
 {
-	if (pthread_mutex_init(&list->right_to_write, NULL))
+	if (pthread_mutex_init(list->right_to_write, NULL))
 	{
 		write (1, "Error: cant't init mutex!\n", 26);
 		return (0);
 	}
 	gather_philos(list);
+	return (1);
 }
 
 int	init_all(t_main *list, int argc, char **argv)
@@ -32,7 +33,7 @@ int	init_all(t_main *list, int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-	t_table table;
+	t_main table;
 
 	table.forks = NULL;
 	table.philos = NULL;
@@ -43,5 +44,8 @@ int main(int argc, char **argv)
 	}
 	if (!init_all(&table, argc, argv))
 		return (0);
+	start_dinner(&table);
+	run_threads(&table);
+	exit(0);
 	return (0);
 }

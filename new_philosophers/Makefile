@@ -1,15 +1,9 @@
 NAME = philosophers
 
-SOURCE = eat.c \
-		fill_main_struct.c \
-		ft_atoi_long.c \
-		init_func.c \
-		main.c \
-		start_dinner.c \
-		start_gathering.c \
-		check_errors.c \
-		get_time.c \
-		waiter.c
+SOURCE = check_input.c dining.c eat.c \
+			fill_main_struct.c ft_atoi_long.c \
+			get_time.c init_staff.c main.c \
+			start_gathering.c
 
 HEADER = philosophers.h
 
@@ -20,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(OBJECTS) $(HEADER)
-		$(CC) $(CFLAGS) -pthread $(OBJECTS) -o $(NAME)
+		$(CC) $(CFLAGS)  -pthread $(OBJECTS) -o $(NAME)
 
 all:	$(NAME)
 

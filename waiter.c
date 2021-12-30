@@ -5,12 +5,10 @@ static void	*service(void *args)
 	t_arguments *arguments;
 	t_philos	*philosophers;
 	int	i;
-	int j;
 
 	arguments = (t_arguments *)args;
-	j = arguments->args->n_of_philos;
 	i = 0;
-	philosophers = *arguments->philos;
+	philosophers = arguments->philos;
 	while (1)
 	{
 		pthread_mutex_lock(&philosophers->mutex);

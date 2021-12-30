@@ -7,6 +7,8 @@
 #include <limits.h>
 #include <sys/time.h>
 
+typedef struct s_philos t_philos;
+
 typedef struct s_main
 {
 	int nb_of_philos;
@@ -24,7 +26,8 @@ typedef struct s_philos
 {
 	int philo_pos;
 	int eaten_meals;
-	int last_meal;
+	long last_meal;
+	long start_time;
 	int	done_eating;
 	pthread_mutex_t *right_to_write;
 	pthread_mutex_t *left_fork;
@@ -32,11 +35,13 @@ typedef struct s_philos
 	t_main *table;
 }	t_philos;
 
+signed long long	ft_atoi_long(const char	*string);
 int check_input(int argc, char **argv);
 int	fill_main_struct(t_main *list, int argc, char **argv);
 int	init_philos(t_main *list);
 int	init_mutex(t_main *list);
+void	run_threads(t_main *list);
 void	gather_philos(t_main *list);
-
-unsigned int	get_time();
+void	*routine(void *arg);
+long	get_time();
 #endif

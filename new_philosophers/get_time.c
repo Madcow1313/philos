@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-unsigned int	get_time()
+long	get_time()
 {
 	unsigned int			current_time;
 	struct timeval	time;

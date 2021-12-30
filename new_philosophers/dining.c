@@ -1,14 +1,12 @@
 #include "philosophers.h"
 
-void	eat();
-
 int	check_death(t_main *list, int i)
 {
 	if (get_time() - list->philos[i].last_meal > list->time_to_die)
 	{
-		pthread_mutex_lock(&list->right_to_write);
+		pthread_mutex_lock(list->right_to_write);
 		printf("%ld %d philosopher is dead\n",
-			get_time(), i + 1);
+			get_time() - list->philos[i].last_meal, i + 1);
 		return (0);
 	}
 	return (1);
@@ -36,7 +34,7 @@ void	waiter(t_main *list)
 		}
 		if (philo_full >= list->nb_of_philos)
 		{
-			pthread_mutex_lock(&list->right_to_write);
+			pthread_mutex_lock(list->right_to_write);
 			return ;
 		}
 		usleep(100);
@@ -54,9 +52,10 @@ void	run_threads(t_main *list)
 	{
 		if (i % 2 == 0)
 		{	
-			if (pthread_create(&thread, NULL, eat, &list->philos[i]))
+			list->philos[i].last_meal = list->start_time;
+			if (pthread_create(&thread, NULL, routine, &list->philos[i]))
 			{
-				pthread_mutex_lock(&list->right_to_write);
+				pthread_mutex_lock(list->right_to_write);
 				printf("Error, unable to create thread\n");
 				return ;
 			}
@@ -69,12 +68,14 @@ void	run_threads(t_main *list)
 	{
 		if (i % 2 != 0)
 		{	
-			if (pthread_create(&thread, NULL, eat, &list->philos[i]))
+			list->philos[i].last_meal = list->start_time;
+			if (pthread_create(&thread, NULL, routine, &list->philos[i]))
 			{
-				pthread_mutex_lock(&list->right_to_write);
+				pthread_mutex_lock(list->right_to_write);
 				printf("Error, unable to create thread\n");
 				return ;
 			}
+			pthread_detach(thread);
 		}
 		i++;
 	}
