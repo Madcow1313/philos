@@ -4,20 +4,21 @@ void	take_forks(t_philos *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
 	pthread_mutex_lock(philo->right_to_write);
-	printf("%ld %d philosopher has taken a fork\n", get_time() - philo->table->start_time, philo->philo_pos);
+	printf("%ld %d has taken a fork\n", get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
 	pthread_mutex_lock(philo->right_fork);
 	pthread_mutex_lock(philo->right_to_write);
-	printf("%ld %d philosopher has taken a fork\n", get_time() - philo->table->start_time, philo->philo_pos);
+	printf("%ld %d has taken a fork\n", get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
 }
 
 void	eat(t_philos *philo)
 {
 	pthread_mutex_lock(philo->right_to_write);
-	printf("%ld %d philosopher is eating\n", get_time() - philo->table->start_time, philo->philo_pos);
+	printf("%ld %d is eating\n", get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
 	usleep(philo->table->time_to_eat * 1000);
+	philo->eaten_meals++;
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }
@@ -25,7 +26,7 @@ void	eat(t_philos *philo)
 void	philo_sleep(t_philos *philo)
 {
 	pthread_mutex_lock(philo->right_to_write);
-	printf("%ld %d philosopher is sleeping\n", get_time() - philo->table->start_time, philo->philo_pos);
+	printf("%ld %d is sleeping\n", get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
 	usleep(philo->table->time_to_sleep * 1000);
 }
@@ -33,7 +34,7 @@ void	philo_sleep(t_philos *philo)
 void	think(t_philos *philo)
 {
 	pthread_mutex_lock(philo->right_to_write);
-	printf("%ld %d philosopher is thinking\n", get_time() - philo->table->start_time, philo->philo_pos);
+	printf("%ld %d is thinking\n", get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
 }
 
@@ -42,6 +43,11 @@ void	*routine(void *arg)
 	t_philos *philo;
 
 	philo = (t_philos *)arg;
+	if ((philo->philo_pos - 1) % 2 != 0)
+	{
+		think(philo);
+		usleep(100);
+	}
 	while(1)
 	{
 		take_forks(philo);

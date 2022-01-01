@@ -2,6 +2,7 @@
 
 int	start_dinner(t_main *list)
 {
+	list->right_to_write = malloc(sizeof(pthread_mutex_t));
 	if (pthread_mutex_init(list->right_to_write, NULL))
 	{
 		write (1, "Error: cant't init mutex!\n", 26);
@@ -46,6 +47,6 @@ int main(int argc, char **argv)
 		return (0);
 	start_dinner(&table);
 	run_threads(&table);
-	exit(0);
+	//exit(0);
 	return (0);
 }
