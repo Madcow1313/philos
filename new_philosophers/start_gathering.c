@@ -23,6 +23,7 @@ void	give_forks(t_main *list)
 			list->philos[i].right_fork = &list->forks[i];
 		}
 		list->philos[i].eaten_meals = 0;
+		list->philos[i].done_eating = 0;
 		i++;
 	}
 }

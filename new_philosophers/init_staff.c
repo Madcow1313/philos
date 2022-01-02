@@ -23,6 +23,7 @@ int	init_philos(t_main *list)
 
 	i = 0;
 	list->philos = malloc(sizeof(t_philos) * list->nb_of_philos);
+	list->full_philo = 0;
 	if (!(list->philos))
 		return (0);
 	while (i < list->nb_of_philos)

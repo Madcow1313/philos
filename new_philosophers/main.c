@@ -1,5 +1,23 @@
 #include "philosophers.h"
 
+void	free_all(t_main *list)
+{
+	int	i;
+
+	i = 0;
+	while (i < list->nb_of_philos)
+	{
+		if (list->forks)
+			pthread_mutex_destroy(&(list->forks[i]));
+		i++;
+	}
+	if (list->forks)
+		free(list->forks);
+	if (list->philos)
+		free(list->philos);
+	pthread_mutex_destroy(list->right_to_write);
+}
+
 int	start_dinner(t_main *list)
 {
 	list->right_to_write = malloc(sizeof(pthread_mutex_t));
@@ -34,19 +52,17 @@ int	init_all(t_main *list, int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-	t_main table;
+	t_main list;
 
-	table.forks = NULL;
-	table.philos = NULL;
 	if (!check_input(argc, argv))
 	{
 		write (1, "Error: Wrong arguments!\n", 24);
 		return (0);
 	}
-	if (!init_all(&table, argc, argv))
+	if (!init_all(&list, argc, argv))
 		return (0);
-	start_dinner(&table);
-	run_threads(&table);
-	//exit(0);
+	start_dinner(&list);
+	run_threads(&list);
+	free_all(&list);
 	return (0);
 }

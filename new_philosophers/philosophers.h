@@ -20,6 +20,7 @@ typedef struct s_main
 	long    time_to_eat;
 	long    time_to_die;
 	long    time_to_sleep;
+	int	full_philo;
 }	t_main;
 
 typedef struct s_philos

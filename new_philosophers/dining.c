@@ -15,29 +15,25 @@ int	check_death(t_main *list, int i)
 void	waiter(t_main *list)
 {
 	int	i;
-	int	philo_full;
 
 	i = 0;
-	philo_full = 0;
 	while (1)
 	{
 		i = 0;
-		while (i < list->nb_of_philos)
-		{
-			if (list->philos[i].eaten_meals >= list->nb_of_meals
-				&& !list->philos[i].done_eating
-				&& list->nb_of_meals > 0)
-				philo_full++;
-			if (!check_death(list, i))
-				return ;
-			i++;
-		}
-		if (philo_full >= list->nb_of_philos)
+		//pthread_mutex_lock(list->right_to_write);
+		if (list->full_philo == list->nb_of_philos)
 		{
 			pthread_mutex_lock(list->right_to_write);
 			return ;
 		}
-		//usleep(100);
+		//pthread_mutex_unlock(list->right_to_write);
+		while (i < list->nb_of_philos)
+		{
+			if (!check_death(list, i))
+				return ;
+			i++;
+		}
+		usleep(100);
 	}
 }
 
@@ -64,6 +60,7 @@ void	run_threads(t_main *list)
 		}
 		i++;
 	}
+	//usleep(1000);
 	i = 0;
 	while (i < list->nb_of_philos)
 	{
@@ -76,7 +73,7 @@ void	run_threads(t_main *list)
 				printf("Error, unable to create thread\n");
 				return ;
 			}
-			//usleep(100);
+			//usleep(1000);
 			pthread_detach(thread);
 		}
 		i++;
