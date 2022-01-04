@@ -16,6 +16,8 @@ void	free_all(t_main *list)
 	if (list->philos)
 		free(list->philos);
 	pthread_mutex_destroy(list->right_to_write);
+	if (list->right_to_write)
+		free(list->right_to_write);
 }
 
 int	start_dinner(t_main *list)
@@ -61,8 +63,8 @@ int main(int argc, char **argv)
 	}
 	if (!init_all(&list, argc, argv))
 		return (0);
-	start_dinner(&list);
-	run_threads(&list);
+	if (start_dinner(&list))
+		run_threads(&list);
 	free_all(&list);
 	return (0);
 }

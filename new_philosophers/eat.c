@@ -49,6 +49,7 @@ void	*routine(void *arg)
 		//think(philo);
 		//usleep(1000);
 		philo_sleep(philo);
+		think(philo);
 	}
 	while(1)
 	{

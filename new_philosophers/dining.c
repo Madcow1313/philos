@@ -48,7 +48,7 @@ void	run_threads(t_main *list)
 	{
 		if (i % 2 == 0)
 		{	
-			list->philos[i].last_meal = get_time();
+			list->philos[i].last_meal = list->start_time;
 			if (pthread_create(&thread, NULL, routine, &list->philos[i]))
 			{
 				pthread_mutex_lock(list->right_to_write);
@@ -66,14 +66,14 @@ void	run_threads(t_main *list)
 	{
 		if (i % 2 != 0)
 		{	
-			list->philos[i].last_meal = get_time();
+			list->philos[i].last_meal = list->start_time;
 			if (pthread_create(&thread, NULL, routine, &list->philos[i]))
 			{
 				pthread_mutex_lock(list->right_to_write);
 				printf("Error, unable to create thread\n");
 				return ;
 			}
-			//usleep(1000);
+			//usleep(100);
 			pthread_detach(thread);
 		}
 		i++;
