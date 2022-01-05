@@ -6,7 +6,7 @@
 /*   By: wabathur <wabathur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:22:42 by wabathur          #+#    #+#             */
-/*   Updated: 2022/01/05 12:27:23 by wabathur         ###   ########.fr       */
+/*   Updated: 2022/01/05 13:58:53 by wabathur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,9 @@ void				run_threads(t_main *list);
 void				gather_philos(t_main *list);
 void				*routine(void *arg);
 long				get_time(void);
+
+void	print_think(t_philos *philo);
+void	print_fork(t_philos *philo);
+void	print_eat(t_philos *philo);
+void	print_sleep(t_philos *philo);
 #endif

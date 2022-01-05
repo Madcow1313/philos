@@ -3,7 +3,7 @@ NAME = philosophers
 SOURCE = check_input.c dining.c eat.c \
 			fill_main_struct.c ft_atoi_long.c \
 			get_time.c init_staff.c main.c \
-			start_gathering.c
+			start_gathering.c write_staff.c
 
 HEADER = philosophers.h
 

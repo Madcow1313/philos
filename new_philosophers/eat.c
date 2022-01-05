@@ -6,7 +6,7 @@
 /*   By: wabathur <wabathur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:46:07 by wabathur          #+#    #+#             */
-/*   Updated: 2022/01/05 12:11:34 by wabathur         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:11:06 by wabathur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ void	take_forks(t_philos *philo)
 	pthread_mutex_lock(philo->right_to_write);
 	printf("%ld %d has taken a fork\n",
 		get_time() - philo->table->start_time, philo->philo_pos);
+	//print_fork(philo);
 	pthread_mutex_unlock(philo->right_to_write);
 	pthread_mutex_lock(philo->right_fork);
 	pthread_mutex_lock(philo->right_to_write);
 	printf("%ld %d has taken a fork\n",
 		get_time() - philo->table->start_time, philo->philo_pos);
+	//print_fork(philo);
 	pthread_mutex_unlock(philo->right_to_write);
 }
 
 void	eat(t_philos *philo)
 {
 	pthread_mutex_lock(philo->right_to_write);
+	//print_eat(philo);
 	printf("%ld %d is eating\n",
 		get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
@@ -41,6 +44,7 @@ void	eat(t_philos *philo)
 void	philo_sleep(t_philos *philo)
 {
 	pthread_mutex_lock(philo->right_to_write);
+	//print_sleep(philo);
 	printf("%ld %d is sleeping\n",
 		get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
@@ -50,6 +54,7 @@ void	philo_sleep(t_philos *philo)
 void	think(t_philos *philo)
 {
 	pthread_mutex_lock(philo->right_to_write);
+	//print_think(philo);
 	printf("%ld %d is thinking\n",
 		get_time() - philo->table->start_time, philo->philo_pos);
 	pthread_mutex_unlock(philo->right_to_write);
