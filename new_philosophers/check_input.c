@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wabathur <wabathur@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/05 11:48:36 by wabathur          #+#    #+#             */
+/*   Updated: 2022/01/05 11:48:57 by wabathur         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
-static int  ft_isdigit(int digit)
+static int	ft_isdigit(int digit)
 {
 	if (digit >= '0' && digit <= '9')
 		return (1);
@@ -8,10 +20,10 @@ static int  ft_isdigit(int digit)
 		return (0);
 }
 
-static int  check_digits(char **argv)
+static int	check_digits(char **argv)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 1;
@@ -29,8 +41,7 @@ static int  check_digits(char **argv)
 	return (1);
 }
 
-
-int check_input(int argc, char **argv)
+int	check_input(int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
 		return (0);

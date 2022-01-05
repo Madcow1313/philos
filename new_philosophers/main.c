@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wabathur <wabathur@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/05 12:20:26 by wabathur          #+#    #+#             */
+/*   Updated: 2022/01/05 12:20:26 by wabathur         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 void	free_all(t_main *list)
@@ -52,9 +64,9 @@ int	init_all(t_main *list, int argc, char **argv)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_main list;
+	t_main	list;
 
 	if (!check_input(argc, argv))
 	{
