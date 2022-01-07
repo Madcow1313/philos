@@ -16,7 +16,6 @@ CFLAGS = -Wall -Wextra -Werror
 $(NAME): $(OBJECTS) $(HEADER)
 		$(CC) $(CFLAGS)  -pthread $(OBJECTS) -o $(NAME)
 		@echo "Make done"
-		say im ready fuckin slave
 
 all:	$(NAME)
 
