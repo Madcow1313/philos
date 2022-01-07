@@ -6,7 +6,7 @@
 /*   By: wabathur <wabathur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:20:26 by wabathur          #+#    #+#             */
-/*   Updated: 2022/01/05 12:20:26 by wabathur         ###   ########.fr       */
+/*   Updated: 2022/01/07 10:37:57 by wabathur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ void	free_all(t_main *list)
 int	start_dinner(t_main *list)
 {
 	list->right_to_write = malloc(sizeof(pthread_mutex_t));
+	if (!list->right_to_write)
+	{
+		write (1, "Error: Something went wrong with malloc!\n", 41);
+		return (0);
+	}
 	if (pthread_mutex_init(list->right_to_write, NULL))
 	{
 		write (1, "Error: cant't init mutex!\n", 26);

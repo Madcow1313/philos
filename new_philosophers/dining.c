@@ -6,7 +6,7 @@
 /*   By: wabathur <wabathur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:49:06 by wabathur          #+#    #+#             */
-/*   Updated: 2022/01/05 12:17:57 by wabathur         ###   ########.fr       */
+/*   Updated: 2022/01/07 15:04:37 by wabathur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	check_death(t_main *list, int i)
 {
+	pthread_mutex_lock(list->right_to_write);
 	if (get_time() - list->philos[i].last_meal > list->time_to_die)
 	{
-		pthread_mutex_lock(list->right_to_write);
 		printf("%ld %d died\n",
 			get_time() - list->start_time, i + 1);
 		return (0);
 	}
+	pthread_mutex_unlock(list->right_to_write);
 	return (1);
 }
 
@@ -43,7 +44,6 @@ void	waiter(t_main *list)
 				return ;
 			i++;
 		}
-		usleep(1000);
 	}
 }
 

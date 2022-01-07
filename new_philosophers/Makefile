@@ -3,7 +3,7 @@ NAME = philosophers
 SOURCE = check_input.c dining.c eat.c \
 			fill_main_struct.c ft_atoi_long.c \
 			get_time.c init_staff.c main.c \
-			start_gathering.c write_staff.c
+			start_gathering.c
 
 HEADER = philosophers.h
 
@@ -15,13 +15,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(OBJECTS) $(HEADER)
 		$(CC) $(CFLAGS)  -pthread $(OBJECTS) -o $(NAME)
+		@echo "Make done"
+		say im ready fuckin slave
 
 all:	$(NAME)
 
 clean:
-		rm -rf $(OBJECTS)
+		@rm -rf $(OBJECTS)
 
 fclean:
-		rm -rf $(OBJECTS) $(NAME)
+		@rm -rf $(OBJECTS) $(NAME)
 
 re:		fclean $(NAME)

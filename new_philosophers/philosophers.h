@@ -6,7 +6,7 @@
 /*   By: wabathur <wabathur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:22:42 by wabathur          #+#    #+#             */
-/*   Updated: 2022/01/05 13:58:53 by wabathur         ###   ########.fr       */
+/*   Updated: 2022/01/07 11:41:26 by wabathur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
-# include <limits.h>
 # include <sys/time.h>
 
 typedef struct s_philos	t_philos;
@@ -44,6 +43,7 @@ typedef struct s_philos
 	long			last_meal;
 	long			start_time;
 	int				done_eating;
+	int				is_eating;
 	pthread_mutex_t	*right_to_write;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -59,9 +59,5 @@ void				run_threads(t_main *list);
 void				gather_philos(t_main *list);
 void				*routine(void *arg);
 long				get_time(void);
-
-void	print_think(t_philos *philo);
-void	print_fork(t_philos *philo);
-void	print_eat(t_philos *philo);
-void	print_sleep(t_philos *philo);
+void				ft_usleep(long time);
 #endif
