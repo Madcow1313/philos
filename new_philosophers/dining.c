@@ -21,7 +21,7 @@ int	check_death(t_main *list, int i)
 			get_time() - list->start_time, i + 1);
 		return (0);
 	}
-	pthread_mutex_unlock(list->right_to_write);
+	//pthread_mutex_unlock(list->right_to_write);
 	return (1);
 }
 
